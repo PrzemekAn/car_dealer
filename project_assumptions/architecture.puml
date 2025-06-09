@@ -55,8 +55,6 @@ class UserInterface{
 
 UserInterface <.. App: uses
 
-note "add function for displaying sorted carRecord, sorting filter\nand order (asc desc) as argument " as N1
-
 
 @enduml
 
