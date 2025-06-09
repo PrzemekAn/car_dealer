@@ -1,0 +1,9 @@
+#ifndef DEFINES_H
+#define DEFINES_H
+
+#define ID_COLUMN_WIDTH 10
+#define MODEL_CULUMN_WIDTH 15
+#define YEAR_CULUMN_WIDTH 25
+#define PRICE_CULUMN_WIDTH 15
+
+#endif

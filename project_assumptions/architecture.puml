@@ -1,0 +1,68 @@
+@startuml class_diagram_lexer
+skinparam linetype polyline
+skinparam linetype ortho
+
+
+class FileHandler{
+    - m_file_path: std::string
+    + FileHandler(std::string path)
+    + load_data(): std::vector<CarRecord>
+    + save_data(const std::vector<CarRecord>&): void
+}
+
+struct CarRecord{
+    + model: std::string
+    + registration_year: int
+    + base_price: float
+    + price_drop: float
+    + current_price: float
+    + available: bool
+    + inclusion_date: std::time_t
+}
+
+class CarDealer{
+    - m_car_records: std::vector<CarRecord>
+    - m_file_handler: FileHandler
+    - update_price_drop(): void
+    + CarDealer(FileHandler fh)
+    + all_cars(): const std::vector<CarRecord>&
+    + available_cars(): std::vector<CarRecordRefWrapper>
+    + sold_cars(): std::vector<CarRecordRefWrapper>
+    + add_car_record(std::tuple<std::string, int, float> cr_data): void
+    + mark_as_sold(size_t index): void
+    + db_update(): void
+    + overview(): void
+    + update_prices(): void
+}
+
+CarDealer *-- CarRecord
+FileHandler <.. CarDealer: uses
+
+class App{
+    +run(): void
+}
+
+CarDealer <.. App: uses
+
+class UserInterface{
+    + Action: enum
+    + display_action_menu(): void
+    + get_action(): Action
+    + display_car_selection_menu(): void
+    + get_seletion(): int
+    + get_car_details(): std::tuple<std::string, int, float>
+}
+
+UserInterface <.. App: uses
+
+note "add function for displaying sorted carRecord, sorting filter\nand order (asc desc) as argument " as N1
+
+
+@enduml
+
+
+
+
+
+
+
